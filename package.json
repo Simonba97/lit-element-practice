@@ -7,14 +7,20 @@
   "type": "module",
   "scripts": {
     "analyze": "cem analyze --litelement",
-    "start": "web-dev-server"
+    "build:css": "postcss src/styles/tailwind.css -o src/styles/tailwind.generated.css",
+    "watch:css": "postcss src/styles/tailwind.css -o src/styles/tailwind.generated.css --watch",
+    "start": "npm run watch:css & wds --node-resolve --watch --open"
   },
   "dependencies": {
-    "lit": "^3.1.4"
+    "lit": "^3.1.4",
+    "postcss": "^8.4.41"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.10.3",
-    "@web/dev-server": "^0.4.6"
+    "@web/dev-server": "^0.4.6",
+    "autoprefixer": "^10.4.20",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.10"
   },
   "customElements": "custom-elements.json"
 }
