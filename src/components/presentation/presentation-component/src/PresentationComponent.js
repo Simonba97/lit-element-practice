@@ -25,7 +25,7 @@ export class PresentationComponent extends LitElement {
 
       <!-- Second section -->
       <div class="footer">
-        Am a footer
+        <footer-component></footer-component>
       </div>
     </div>
      

@@ -2,8 +2,11 @@ import { html, css, LitElement } from 'lit';
 export class SkillsCardComponent extends LitElement {
 
     static styles = css`
+    :host {
+        width: 100%;
+    }
         .cardContainer {
-            width: 100%; 
+            width: 77%; 
             max-width: 28rem; 
             margin: 0 10px;
             padding: 1rem 2rem;
@@ -80,6 +83,7 @@ export class SkillsCardComponent extends LitElement {
         }
         .bodyCard .skillTitle {
             margin: 10px 0;
+            color: #6B7280; 
         }
         
     `;
@@ -128,7 +132,7 @@ export class SkillsCardComponent extends LitElement {
         return html`
             <div class="cardContainer">
                 <div class="headerCard">
-                    <h5 class="titleCard">Soft skills</h5>
+                    <h5 class="titleCard">Top soft skills</h5>
                 </div>
                 <div class="bodyCard">
                     <ul class="listSkills">
