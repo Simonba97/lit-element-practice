@@ -32,7 +32,7 @@ export class ListComponent extends LitElement {
         });
 
         this.dispatchEvent(event);
-    }
+    } // end _changeParentProperties
 
     render() {
         return html`

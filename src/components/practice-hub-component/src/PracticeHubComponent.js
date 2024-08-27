@@ -4,11 +4,16 @@ import { html, css, LitElement } from 'lit';
 import './CardComponent.js';
 import './ListComponent.js';
 
+/* Imports to Common components */
+import '../../common/floating-button-component/floating-button-component.js';
+
 /* Imports to Presentation components */
 import '../../presentation/presentation-component/presentation-component.js';
 
 /* Imports to Timer components */
 import '../../timer/timer-component/timer-component.js';
+
+
 
 export class PracticeHubComponent extends LitElement {
 
@@ -59,7 +64,7 @@ export class PracticeHubComponent extends LitElement {
     title: { type: String },
     description: { type: String },
     listHub: { type: Array },
-    optionIdSelected: { type: Number } // Indicator of which option is selected
+    optionIdSelected: { type: Number }, // Indicator of which option is selected
   };
 
   constructor() {
@@ -72,7 +77,7 @@ export class PracticeHubComponent extends LitElement {
     this.listHub = [
       {
         id: 0,
-        icon: "🧑🏻‍💻",
+        icon: null,
         title: "Practice hub",
         description: "Litelement practice hub to view each of the assigned exercises",
         available: false // Always false, representing default value to show main list
@@ -105,6 +110,7 @@ export class PracticeHubComponent extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('update-properties', this._updateProperties.bind(this));
+    this.addEventListener('go-main-list', this._updateProperties.bind(this));
   } // end connectedCallback
 
   _updateProperties(event) {
@@ -115,13 +121,14 @@ export class PracticeHubComponent extends LitElement {
 
 
   /* Custom Functions */
-
+  /* Empty jet  */
 
   render() {
     return html`
       <!-- Main content -->
       <div id="mainContainer" class="mainContainer">
           
+      <floating-button-component .available="${this.optionIdSelected != 0}"></floating-button-component>
         <div id="headerPracticeHub" class="header">
           <div class="titleHeaderContainer">
             <span class="title underlineGradient">${this.title}</span>
