@@ -110,7 +110,6 @@ export class PracticeHubComponent extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('update-properties', this._updateProperties.bind(this));
-    this.addEventListener('go-main-list', this._updateProperties.bind(this));
   } // end connectedCallback
 
   _updateProperties(event) {
