@@ -1,13 +1,9 @@
 import { LitElement, html, css } from 'lit';
+import "../src/components/practice-hub-component/practice-hub-component"
 
 class LitElementPractice extends LitElement {
 
-  createRenderRoot() {
-    return this; // Desactiva el Shadow DOM, para que los estilos de Tailwind se apliquen correctamente
-  }
-
   static properties = {
-    header: { type: String },
   }
 
   static styles = css`
@@ -19,7 +15,7 @@ class LitElementPractice extends LitElement {
 
   render() {
     return html`
-      <span class="bg-blue-300">hola mundo</span>
+      <practice-hub-component></practice-hub-component>
     `;
   }
 }
