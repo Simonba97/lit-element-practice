@@ -1,5 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import './CardComponent.js';
+import './ListComponent.js';
 
 export class PracticeHubComponent extends LitElement {
 
@@ -37,10 +38,6 @@ export class PracticeHubComponent extends LitElement {
       margin-top: -20px;
     }
 
-    .contListOptions {
-      display: flex;
-    }
-
     .underlineGradient {
       background-image: linear-gradient(80deg, #1D4ED8, #24ff8e 100%);
       background-repeat: no-repeat;
@@ -54,15 +51,24 @@ export class PracticeHubComponent extends LitElement {
     title: { type: String },
     description: { type: String },
     listHub: { type: Array },
+    optionIdSelected: { type: Number } // Indicator of which option is selected
   };
 
   constructor() {
     super();
     this.title = "Practice hub";
     this.description = "Litelement practice hub to view each of the assigned exercises";
+    this.optionIdSelected = 0; // Default is 0, correspond to main list
 
     /* List of options available to display in the application */
     this.listHub = [
+      {
+        id: 0,
+        icon: "🧑🏻‍💻",
+        title: "Practice hub",
+        description: "Litelement practice hub to view each of the assigned exercises",
+        available: false // Always false, representing default value to show main list
+      },
       {
         id: 1,
         icon: "🧑🏻‍💻",
@@ -87,6 +93,22 @@ export class PracticeHubComponent extends LitElement {
     ];
   }
 
+  /* LitElement Native Lifecycle Functions */
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('update-properties', this._updateProperties.bind(this));
+  } // end connectedCallback
+
+  _updateProperties(event) {
+    this.title = event.detail.title;
+    this.description = event.detail.description;
+    this.optionIdSelected = event.detail.optionIdSelected;
+  } // end _updateProperties
+
+
+  /* Custom Functions */
+
+
   render() {
     return html`
       <!-- Main content -->
@@ -105,19 +127,23 @@ export class PracticeHubComponent extends LitElement {
 
         <!-- Body page -->
         <div id="bodyPracticeHub" class="body">
-          <div class="contListOptions">
-              <!-- Filter available options and send to custom card component -->
-              ${this.listHub.filter(item => item.available).map(item => (html`
-                <card-component @click="${(e) => console.log(item.id)}" icon="${item.icon}" title="${item.title}" description="${item.description}" ></card-component>
-             `))}
-          </div>
+          <!-- Show main list or Component selected -->
+          ${this.optionIdSelected === 0 ? html`<list-component .options="${this.listHub}"></list-component>` : this.renderComponentSelected()}
         </div>
         
       </div>
     `;
-  }
+  } // end render
 
-  renderComponent() {
+  renderComponentSelected() {
+    const componentsMap = {
+      0: html`<list-component .options="${this.options}"></list-component>`,
+      1: html`<span>Practice</span>`,
+      2: html`<span>Timer</span>`,
+      3: html`<span>TaskList</span>`,
+    };
 
-  }
+    return componentsMap[this.optionIdSelected] || html``; // If optionIdSelected does not match any key, an empty component is returned
+  } // end renderComponentSelected
+
 }
