@@ -1,6 +1,11 @@
 import { html, css, LitElement } from 'lit';
+
+/* Imports to PracticeHub Components */
 import './CardComponent.js';
 import './ListComponent.js';
+
+/* Imports to Presentation components */
+import '../../presentation/presentation-component/presentation-component.js';
 
 export class PracticeHubComponent extends LitElement {
 
@@ -138,7 +143,7 @@ export class PracticeHubComponent extends LitElement {
   renderComponentSelected() {
     const componentsMap = {
       0: html`<list-component .options="${this.options}"></list-component>`,
-      1: html`<span>Practice</span>`,
+      1: html`<presentation-component></presentation-component>`,
       2: html`<span>Timer</span>`,
       3: html`<span>TaskList</span>`,
     };
