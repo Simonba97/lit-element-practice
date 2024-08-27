@@ -507,6 +507,12 @@ video {
 .flex {
   display: flex;
 }
+.flow-root {
+  display: flow-root;
+}
+.w-8 {
+  width: 2rem;
+}
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
