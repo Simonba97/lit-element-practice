@@ -7,6 +7,9 @@ import './ListComponent.js';
 /* Imports to Presentation components */
 import '../../presentation/presentation-component/presentation-component.js';
 
+/* Imports to Timer components */
+import '../../timer/timer-component/timer-component.js';
+
 export class PracticeHubComponent extends LitElement {
 
   static styles = css`
@@ -144,7 +147,7 @@ export class PracticeHubComponent extends LitElement {
     const componentsMap = {
       0: html`<list-component .options="${this.options}"></list-component>`,
       1: html`<presentation-component></presentation-component>`,
-      2: html`<span>Timer</span>`,
+      2: html`<timer-component duration="7"></timer-component>`,
       3: html`<span>TaskList</span>`,
     };
 

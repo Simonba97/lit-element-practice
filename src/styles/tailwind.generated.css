@@ -511,6 +511,9 @@ video {
 .mb-2 {
   margin-bottom: 0.5rem;
 }
+.block {
+  display: block;
+}
 .flex {
   display: flex;
 }
@@ -540,6 +543,9 @@ video {
 }
 .gap-8 {
   gap: 2rem;
+}
+.border {
+  border-width: 1px;
 }
 .p-4 {
   padding: 1rem;
