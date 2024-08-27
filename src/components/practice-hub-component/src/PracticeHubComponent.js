@@ -13,6 +13,9 @@ import '../../presentation/presentation-component/presentation-component.js';
 /* Imports to Timer components */
 import '../../timer/timer-component/timer-component.js';
 
+/* Imports to Timer components */
+import '../../task-list/task-list-component/task-list-component.js';
+
 
 
 export class PracticeHubComponent extends LitElement {
@@ -126,8 +129,11 @@ export class PracticeHubComponent extends LitElement {
     return html`
       <!-- Main content -->
       <div id="mainContainer" class="mainContainer">
-          
-      <floating-button-component .available="${this.optionIdSelected != 0}"></floating-button-component>
+        
+        <!-- Always floating button -->
+        <floating-button-component .available="${this.optionIdSelected != 0}"></floating-button-component>
+
+        <!-- Header page -->
         <div id="headerPracticeHub" class="header">
           <div class="titleHeaderContainer">
             <span class="title underlineGradient">${this.title}</span>
@@ -153,8 +159,8 @@ export class PracticeHubComponent extends LitElement {
     const componentsMap = {
       0: html`<list-component .options="${this.options}"></list-component>`,
       1: html`<presentation-component></presentation-component>`,
-      2: html`<timer-component duration="7"></timer-component>`,
-      3: html`<span>TaskList</span>`,
+      2: html`<timer-component></timer-component>`,
+      3: html`<task-list-component></task-list-component>`,
     };
 
     return componentsMap[this.optionIdSelected] || html``; // If optionIdSelected does not match any key, an empty component is returned
