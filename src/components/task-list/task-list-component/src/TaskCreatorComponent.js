@@ -90,7 +90,6 @@ export class TaskCreatorComponent extends LitElement {
   `;
 
   static properties = {
-    listTask: { type: Array },
     formMoreDetailAvailable: { type: Boolean },
     messageDetail: { type: Object } // All info related
   };
@@ -98,7 +97,6 @@ export class TaskCreatorComponent extends LitElement {
   constructor() {
     super();
     this.formMoreDetailAvailable = false;
-    this.listTask = JSON.parse(localStorage.getItem('listTask')) || []; // Retrieve existing tasks from localStorage
     this.messageDetail = {
       show: false,
       textMessage: null,
@@ -121,11 +119,7 @@ export class TaskCreatorComponent extends LitElement {
       status: "Not started"
     };
 
-    // Add the new task to the list
-    this.listTask = [...this.listTask, newTask];
-
-    // Save the updated list back to localStorage
-    localStorage.setItem('listTask', JSON.stringify(this.listTask));
+    this._addTaskParentProperties(newTask);
 
     // Clear the form
     this._emptyForm(titleInput, descriptionInput);
@@ -133,7 +127,6 @@ export class TaskCreatorComponent extends LitElement {
     // Configuration message
     this.messageDetail.show = true;
     this.messageDetail.textMessage = "Task has been created successfully 🚀";
-
   }
 
 
@@ -143,6 +136,16 @@ export class TaskCreatorComponent extends LitElement {
       descriptionInput.value = '';
     }
   }
+
+  _addTaskParentProperties(newTask) {
+    const event = new CustomEvent('task-added', {
+      detail: newTask,
+      bubbles: true, // Permite que el evento burbujee hacia arriba hasta el padre
+      composed: true // Permite que el evento cruce los límites del Shadow DOM
+    });
+
+    this.dispatchEvent(event);
+  } // end _addTaskParentProperties
 
   render() {
     return html`
