@@ -116,7 +116,7 @@ export class TaskCreatorComponent extends LitElement {
       title: titleInput.value,
       description: descriptionInput ? descriptionInput.value : '',
       datecreate: new Date().toISOString(), // Current date and time
-      status: "Not started"
+      status: "Not Started"
     };
 
     this._addTaskParentProperties(newTask);

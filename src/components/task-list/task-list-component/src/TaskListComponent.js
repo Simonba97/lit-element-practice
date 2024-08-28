@@ -1,6 +1,7 @@
 import { html, css, LitElement } from 'lit';
 
 import './TaskCreatorComponent.js'
+import './TaskBoardComponent.js'
 
 export class TaskListComponent extends LitElement {
   static styles = css`
@@ -8,6 +9,7 @@ export class TaskListComponent extends LitElement {
       display: flex;
       background-color: #ECECEC;
       margin: 0px 10px;
+      margin-bottom: 20px;
       padding: 1.5rem;
       border-radius: 0.5rem;
       border-width: 1px;
@@ -25,13 +27,7 @@ export class TaskListComponent extends LitElement {
       display: flex;
       flex-direction: row;
     }
-    .taskListContainer .dashboardContainer .secundaryColumn {
-      width: 30%;
-    }
-    .taskListContainer .dashboardContainer .mainColumn {
-      width: 70%;
-    }
-
+    
 `;
 
   static properties = {
@@ -47,7 +43,8 @@ export class TaskListComponent extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('task-added', this._handleTaskAdded);
-  }
+    this.addEventListener('modified-status-task', this._handleModifiedStatusTask);
+  } // end connectedCallback
 
   /* Receive a ListTask ready to add */
   _handleTaskAdded(event) {
@@ -60,6 +57,13 @@ export class TaskListComponent extends LitElement {
     localStorage.setItem('listTask', JSON.stringify(this.listTask));
   } // end _handleTaskAdded
 
+  _handleModifiedStatusTask(event) {
+    const modifiedTask = event.detail;
+    this.listTask.find(task => task.id == modifiedTask.taskId).status = modifiedTask.newStatus;
+    // Save the updated list back to localStorage
+    localStorage.setItem('listTask', JSON.stringify(this.listTask));
+    this.listTask = [...this.listTask];
+  } // end _handleModifiedStatusTask
 
   render() {
     return html`
@@ -70,12 +74,9 @@ export class TaskListComponent extends LitElement {
           <task-creator-component></task-creator-component>
         </div>
         
-        <!-- Second row with two columns-->
+        <!-- Second row -->
         <div class="dashboardContainer">
-          <div class="secundaryColumn"> hola</div>
-          <div class="mainColumn">
-            ${this.listTask.map(task => (html`<span>${task.title}</span>`))}
-          </div>
+            <task-board-component .listTask="${this.listTask}"></task-board-component>
         </div>
       </div>
     `;
