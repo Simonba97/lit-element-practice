@@ -1,33 +1,39 @@
 import { html, css, LitElement } from 'lit';
 
+import './TaskCreatorComponent.js'
+
 export class TaskListComponent extends LitElement {
   static styles = css`
     :host {
-      display: block;
-      padding: 25px;
-      color: var(--task-list-component-text-color, #000);
+      display: flex;
+      background-color: #ECECEC;
+      margin: 0px 10px;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      border-width: 1px;
+      border-color: rgb(229, 231, 235);
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     }
-  `;
+
+    .taskListContainer {
+      display: flex;
+      width: 100%;
+    }
+
+`;
 
   static properties = {
-    header: { type: String },
-    counter: { type: Number },
   };
 
   constructor() {
     super();
-    this.header = 'Hey there';
-    this.counter = 5;
-  }
-
-  __increment() {
-    this.counter += 1;
   }
 
   render() {
     return html`
-      <h2>${this.header} Nr. ${this.counter}!</h2>
-      <button @click=${this.__increment}>increment</button>
+      <div class="taskListContainer">
+        <task-creator-component></task-creator-component>
+      </div>
     `;
   }
 }
